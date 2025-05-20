@@ -18,7 +18,7 @@
     <ClCompile Include="test1.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\OneDrive\Documents\OOP_MTH10407\Library.cpp">
+    <ClCompile Include="Library.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
