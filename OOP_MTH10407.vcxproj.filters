@@ -21,5 +21,8 @@
     <ClCompile Include="Library.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="SoftwareHouse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
