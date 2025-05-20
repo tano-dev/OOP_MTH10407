@@ -117,41 +117,41 @@ void Customer::displayCar() {
     }
 }
 
-int main() {
-    Customer* c1 = new Customer("001", "A");
-    Customer* c2 = new Customer("002", "B");
-    Car* car1 = new Car("1", "Mecs");
-    Car* car2 = new Car("2", "Lambo");
-    Car* car3 = new Car("3", "Toyota");
-    c1->addOneCar(car1);
-    c1->addOneCar(car2);
-    c2->addOneCar(car3);
-
-    cout << "Customer 1: " << endl;
-    c1->display();
-    c1->displayCar();
-    cout << "Customer 2: " << endl;
-    c2->display();
-    c2->displayCar();
-
-    c1->removeOneCar(car2);
-    c2->addOneCar(car2);
-
-    cout << "Customer 1 after: " << endl;
-    c1->display();
-    c1->displayCar();
-    cout << "Customer 2 after: " << endl;
-    c2->display();
-    c2->displayCar();
-
-    delete c1;
-    delete c2;
-    delete car1;
-    delete car2;
-    delete car3;
-
-    return 0;
-}
+//int main() {
+//    Customer* c1 = new Customer("001", "A");
+//    Customer* c2 = new Customer("002", "B");
+//    Car* car1 = new Car("1", "Mecs");
+//    Car* car2 = new Car("2", "Lambo");
+//    Car* car3 = new Car("3", "Toyota");
+//    c1->addOneCar(car1);
+//    c1->addOneCar(car2);
+//    c2->addOneCar(car3);
+//
+//    cout << "Customer 1: " << endl;
+//    c1->display();
+//    c1->displayCar();
+//    cout << "Customer 2: " << endl;
+//    c2->display();
+//    c2->displayCar();
+//
+//    c1->removeOneCar(car2);
+//    c2->addOneCar(car2);
+//
+//    cout << "Customer 1 after: " << endl;
+//    c1->display();
+//    c1->displayCar();
+//    cout << "Customer 2 after: " << endl;
+//    c2->display();
+//    c2->displayCar();
+//
+//    delete c1;
+//    delete c2;
+//    delete car1;
+//    delete car2;
+//    delete car3;
+//
+//    return 0;
+//}
 
 /*
 OUTPUT:

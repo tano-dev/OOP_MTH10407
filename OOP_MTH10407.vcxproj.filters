@@ -15,8 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test1.cpp">
+    <ClCompile Include="..\..\..\OneDrive\Documents\OOP_MTH10407\Library.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test1.cpp">
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
