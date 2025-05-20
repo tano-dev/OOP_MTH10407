@@ -69,9 +69,9 @@ Employee::Employee(string number, string name, double salary) {
 	this->setSalary(salary);
 }
 void Employee::display() {
-	cout << "Number: " << this->getNumber() << endl;
-	cout << "Name: " << this->getName() << endl;
-	cout << "Salary: " << this->getSalary() << endl;
+	cout << " +Number: " << this->getNumber() << endl;
+	cout << " +Name: " << this->getName() << endl;
+	cout << " +Salary: " << this->getSalary() << endl;
 }
 //Programmer
 Programmer::Programmer(string number, string name, double salary, string language) : Employee(number, name, salary) {
@@ -85,7 +85,7 @@ string Programmer::getLanguage() {
 }
 
 void Programmer::display() {
-    cout << "Language: " << this->getLanguage() << endl;
+    cout << "-Language: " << this->getLanguage() << endl;
 	Employee::display();
 }
 //SoftwareHouse
@@ -110,7 +110,7 @@ void SoftwareHouse::display() {
 }
 int main() {
     Programmer* p1 = new Programmer("001", "p1", 100, "python");
-    Programmer* p2 = new Programmer("002", "p2", 500, "tieng Viet");
+    Programmer* p2 = new Programmer("002", "p2", 500, "Tieng Viet");
 
     SoftwareHouse* sh1 = new SoftwareHouse("001");
     sh1->addProgrammer(p1);
