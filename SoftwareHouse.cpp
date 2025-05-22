@@ -167,7 +167,4 @@ int main() {
     delete p2;
     delete sh1;
 }
-
-
-
 */
