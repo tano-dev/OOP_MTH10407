@@ -25,7 +25,7 @@ public:
     void display();
 
 };
-class Programmer:public Employee {
+class Programmer :public Employee {
 private:
     string language;
 public:
@@ -44,10 +44,10 @@ public:
     void setNumber(string number);
     string getNumber();
     void addProgrammer(Programmer* prog);
-	void addLeader(ProjectLeader* projectLeader);
+    void addLeader(ProjectLeader* projectLeader);
     void display();
 };
-class ProjectLeader:public Programmer {
+class ProjectLeader :public Programmer {
 private:
     list<Programmer*> programmers;
 public:
@@ -67,70 +67,70 @@ void Employee::setSalary(double salary) {
     this->salary = salary;
 }
 string Employee::getNumber() {
-	return this->number;
+    return this->number;
 }
 string Employee::getName() {
-	return this->name;
+    return this->name;
 }
 double Employee::getSalary() {
-	return this->salary;
+    return this->salary;
 }
 Employee::Employee(string number, string name, double salary) {
-	this->setNumber(number);
-	this->setName(name);
-	this->setSalary(salary);
+    this->setNumber(number);
+    this->setName(name);
+    this->setSalary(salary);
 }
 void Employee::display() {
-	cout << " +Number: " << this->getNumber() << endl;
-	cout << " +Name: " << this->getName() << endl;
-	cout << " +Salary: " << this->getSalary() << endl;
+    cout << " +Number: " << this->getNumber() << endl;
+    cout << " +Name: " << this->getName() << endl;
+    cout << " +Salary: " << this->getSalary() << endl;
 }
 //Programmer
 Programmer::Programmer(string number, string name, double salary, string language) : Employee(number, name, salary) {
     this->setLanguage(language);
 }
 void Programmer::setLanguage(string language) {
-	this->language = language;
+    this->language = language;
 }
 string Programmer::getLanguage() {
-	return this->language;
+    return this->language;
 }
 
 void Programmer::display() {
     cout << "-Language: " << this->getLanguage() << endl;
-	Employee::display();
+    Employee::display();
 }
 //SoftwareHouse
 SoftwareHouse::SoftwareHouse(string number) {
-	this->setNumber(number);
+    this->setNumber(number);
 }
 void SoftwareHouse::setNumber(string number) {
-	this->number = number;
+    this->number = number;
 }
 string SoftwareHouse::getNumber() {
-	return this->number;
+    return this->number;
 }
 void SoftwareHouse::addProgrammer(Programmer* prog) {
-	this->programmerList.push_back(prog);
+    this->programmerList.push_back(prog);
 }
 void SoftwareHouse::addLeader(ProjectLeader* projectLeader) {
-	this->leaders.push_back(projectLeader);
+    this->leaders.push_back(projectLeader);
 }
 void SoftwareHouse::display() {
-	cout << "Software House Number: " << this->getNumber() << endl;
+    cout << "Software House Number: " << this->getNumber() << endl;
     cout << "Project leaders:" << endl;
     for (auto i : this->leaders) {
         i->display();
     }
-	cout << "Programmers in " << this->getNumber() << ": " << endl;
-	for (auto i : this->programmerList) {
-		i->display();
-	}
+    cout << "Programmers in " << this->getNumber() << ": " << endl;
+    for (auto i : this->programmerList) {
+        i->display();
+    }
 }
 //ProjectLeader
 ProjectLeader::ProjectLeader(string number, string name, double salary, string language) : Programmer(number, name, salary, language) {}
 void ProjectLeader::addProgrammer(Programmer* p) {
-	this->programmers.push_back(p);
+    this->programmers.push_back(p);
 }
 void ProjectLeader::displayProgrammers() {
     cout << "Leader's programmers:" << endl;
