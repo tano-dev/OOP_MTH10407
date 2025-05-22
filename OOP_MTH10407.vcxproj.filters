@@ -21,11 +21,11 @@
     <ClCompile Include="Library.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="SoftwareHouse.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="SoftwareHouse_Modify.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SoftwareHouse.cpp">
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

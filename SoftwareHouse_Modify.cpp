@@ -144,28 +144,28 @@ void ProjectLeader::display() {
     displayProgrammers();
 }
 
-//int main() {
-//    Programmer* p1 = new Programmer("001", "p1", 100, "python");
-//    Programmer* p2 = new Programmer("002", "p2", 500, "c++");
-//    Programmer* p3 = new Programmer("003", "p3", 250, "c++");
-//    SoftwareHouse* sh1 = new SoftwareHouse("001");
-//    ProjectLeader* ld1 = new ProjectLeader("000", "owner", 1000, "all");
-//
-//    sh1->addProgrammer(p1);
-//    sh1->addProgrammer(p2);
-//    sh1->addProgrammer(p3);
-//    sh1->addLeader(ld1);
-//    ld1->addProgrammer(p1);
-//    ld1->addProgrammer(p2);
-//
-//
-//
-//    sh1->display();
-//
-//    delete p1;
-//    delete p2;
-//    delete sh1;
-//}
+int main() {
+    Programmer* p1 = new Programmer("001", "p1", 100, "python");
+    Programmer* p2 = new Programmer("002", "p2", 500, "c++");
+    Programmer* p3 = new Programmer("003", "p3", 250, "c++");
+    SoftwareHouse* sh1 = new SoftwareHouse("001");
+    ProjectLeader* ld1 = new ProjectLeader("000", "owner", 1000, "all");
+
+    sh1->addProgrammer(p1);
+    sh1->addProgrammer(p2);
+    sh1->addProgrammer(p3);
+    sh1->addLeader(ld1);
+    ld1->addProgrammer(p1);
+    ld1->addProgrammer(p2);
+
+
+
+    sh1->display();
+
+    delete p1;
+    delete p2;
+    delete sh1;
+}
 
 
 
