@@ -3,11 +3,12 @@
 #include<list>
 
 using namespace std;
-
+//Class defining
 class Employee;
 class Programmer;
 class SoftwareHouse;
-//Class defining
+class ProjectLeader;
+//Class init
 class Employee {
 private:
     string number;
@@ -37,11 +38,22 @@ class SoftwareHouse {
 private:
     string number;
     list<Programmer*> programmerList;
+    list<ProjectLeader*> leaders;
 public:
     SoftwareHouse(string number);
     void setNumber(string number);
     string getNumber();
     void addProgrammer(Programmer* prog);
+	void addLeader(ProjectLeader* projectLeader);
+    void display();
+};
+class ProjectLeader:public Programmer {
+private:
+    list<Programmer*> programmers;
+public:
+    ProjectLeader(string number, string name, double salary, string language); //constructor
+    void addProgrammer(Programmer* p);
+    void displayProgrammers();
     void display();
 };
 //Employee
@@ -101,20 +113,53 @@ string SoftwareHouse::getNumber() {
 void SoftwareHouse::addProgrammer(Programmer* prog) {
 	this->programmerList.push_back(prog);
 }
+void SoftwareHouse::addLeader(ProjectLeader* projectLeader) {
+	this->leaders.push_back(projectLeader);
+}
 void SoftwareHouse::display() {
 	cout << "Software House Number: " << this->getNumber() << endl;
-	cout << "Programmers: " << endl;
+    cout << "Project leaders:" << endl;
+    for (auto i : this->leaders) {
+        i->display();
+    }
+	cout << "Programmers in " << this->getNumber() << ": " << endl;
 	for (auto i : this->programmerList) {
 		i->display();
 	}
 }
+//ProjectLeader
+ProjectLeader::ProjectLeader(string number, string name, double salary, string language) : Programmer(number, name, salary, language) {}
+void ProjectLeader::addProgrammer(Programmer* p) {
+	this->programmers.push_back(p);
+}
+void ProjectLeader::displayProgrammers() {
+    cout << "Leader's programmers:" << endl;
+    for (auto i : this->programmers) {
+        i->display();
+    }
+}
+void ProjectLeader::display() {
+    cout << "Leader's info:" << endl;
+    Programmer::display();
+    displayProgrammers();
+}
+
 int main() {
     Programmer* p1 = new Programmer("001", "p1", 100, "python");
-    Programmer* p2 = new Programmer("002", "p2", 500, "Tieng Viet");
-
+    Programmer* p2 = new Programmer("002", "p2", 500, "c++");
+    Programmer* p3 = new Programmer("003", "p3", 250, "c++");
     SoftwareHouse* sh1 = new SoftwareHouse("001");
+    ProjectLeader* ld1 = new ProjectLeader("000", "owner", 1000, "all");
+
     sh1->addProgrammer(p1);
     sh1->addProgrammer(p2);
+    sh1->addProgrammer(p3);
+    sh1->addLeader(ld1);
+    ld1->addProgrammer(p1);
+    ld1->addProgrammer(p2);
+
+
+
     sh1->display();
 
     delete p1;
