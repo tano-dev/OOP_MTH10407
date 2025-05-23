@@ -165,22 +165,22 @@ void Administrator::display() {
 	Employee::display();
 }
 
-int main() {
-	Programmer a("001", "John", 1000, "C++");
-	Programmer b("002", "Jane", 2000, "Java");
-	Programmer e("004", "Jack", 2000, "Java");
-	ProjectLeader c("003", "Jack", 4000, "Python");
-	Administrator f("005", "Jill", 3000, "HR");
-	c.addProgrammer(&a);
-	c.addProgrammer(&b);
-
-	SoftwareHouse d("Facebook");
-	d.addStaff(&a);
-	d.addStaff(&b);
-	d.addStaff(&c);
-	d.addStaff(&e);
-	d.addStaff(&f);
-	d.display();
-	return 0;
-}
+//int main() {
+//	Programmer a("001", "John", 1000, "C++");
+//	Programmer b("002", "Jane", 2000, "Java");
+//	Programmer e("004", "Jack", 2000, "Java");
+//	ProjectLeader c("003", "Jack", 4000, "Python");
+//	Administrator f("005", "Jill", 3000, "HR");
+//	c.addProgrammer(&a);
+//	c.addProgrammer(&b);
+//
+//	SoftwareHouse d("Facebook");
+//	d.addStaff(&a);
+//	d.addStaff(&b);
+//	d.addStaff(&c);
+//	d.addStaff(&e);
+//	d.addStaff(&f);
+//	d.display();
+//	return 0;
+//}
 
