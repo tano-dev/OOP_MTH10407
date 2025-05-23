@@ -130,6 +130,7 @@
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="SoftwareHouse.cpp" />
     <ClCompile Include="SoftwareHouse_Modify.cpp" />
+    <ClCompile Include="SRS.cpp" />
     <ClCompile Include="test1.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
