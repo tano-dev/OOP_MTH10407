@@ -582,7 +582,10 @@ public class MainTest {
 	// Enroll a few students in AI and CSDL
 	AI_1->enroll(A1);
 	AI_1->enroll(A2);
+	AI_1->enroll(A4);
+	AI_1->enroll(A5);
 	CSDL_1->enroll(A3);
 	CSDL_1->enroll(A4);
+	CSDL_1->enroll(A5);
 	return 0;
 }
