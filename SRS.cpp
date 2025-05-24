@@ -46,9 +46,10 @@ private:
 	Course* course;
 	list<Student*> students;
 	Professor* professor;
-	map<Student*, TranscriptEntry> entries;
+	map<Student*, TranscriptEntry*> entries;
 public:
-	Section(string sectionNo, string dayOfWeek, string timeOfDay, string room, int seatCapacity);
+	Section(string sectionNo, string dayOfWeek, string timeOfDay, string room, int seatCapacity, ScheduleOfClasses* schedule, Course* course);
+	void addSchedule(ScheduleOfClasses* schedule);
 	void setSectionNo(string sectionNo);
 	void setDayOfWeek(string dayOfWeek);
 	void setTimeOfDay(string timeOfDay);
@@ -105,6 +106,7 @@ public:
 	void setTranscript(Transcript* transcript);
 	string getDegree();
 	string getMajor();
+	Transcript* getTranscript();
 	void addSection(Section* section);
 	void dropSection(Section* section);
 	bool isEnrolledIn(Section* section);
@@ -135,7 +137,7 @@ public:
 	void setStudent(Student* student);
 	void addEntry(TranscriptEntry* entry);
 	string verifyCompletion(Course* course);
-	void display();
+	//void display();
 };
 class TranscriptEntry {
 private:
@@ -177,6 +179,7 @@ int Course::getCredits() {
 }
 void Course::scheduleSection(Section* section) {
 	this->sections.push_back(section);
+	section->setCourse(this);
 }
 void Course::addPrerequisite(Course* course) {
 	this->prerequisites.push_back(course);
@@ -213,12 +216,18 @@ Course::~Course() {
 	}
 }
 //Section
-Section::Section(string sectionNo, string dayOfWeek, string timeOfDay, string room, int seatCapacity) {
+Section::Section(string sectionNo, string dayOfWeek, string timeOfDay, string room, int seatCapacity, ScheduleOfClasses* schedule, Course* course) {
 	this->setSectionNo(sectionNo);
 	this->setDayOfWeek(dayOfWeek);
 	this->setTimeOfDay(timeOfDay);
 	this->setRoom(room);
 	this->setSeatCapacity(seatCapacity);
+	this->addSchedule(schedule);
+	course->scheduleSection(this);
+}
+
+void Section::addSchedule(ScheduleOfClasses* schedule) {
+	schedule->addSection(this);
 }
 void Section::setSectionNo(string sectionNo) {
 	this->sectionNo = sectionNo;
@@ -280,9 +289,15 @@ entries.find(student) tra ve Object neu tim thay
 entries.find(end) tra ve Object "NULL" o cuoi map
 */
 void Section::postGrade(Student* student, float grade) {
-	if (student->isEnrolledIn(this)) return;
+	//cout << "a" << endl;
+	if (!student->isEnrolledIn(this)) return;
+	//cout << "b" << endl;
 	if (entries.find(student) != entries.end()) return;
-	entries[student] = TranscriptEntry(grade,this);
+	//cout << "c" << endl;
+	TranscriptEntry* entry = new TranscriptEntry(grade, this);
+	entries[student] = entry;
+	student->getTranscript()->addEntry(entry);
+	//cout << "d"<< endl;
 }
 void Section::display() {
 	cout << "------------------------------------------------ " << endl;
@@ -344,6 +359,8 @@ void Person::display() {
 Student::Student(string ssn, string name, string degree, string major):Person(ssn, name) {
 	this->setDegree(degree);
 	this->setMajor(major);
+	Transcript* transcript = new Transcript(this);
+	this->setTranscript(transcript);
 }
 void Student::setDegree(string degree) {
 	this->degree = degree;
@@ -359,6 +376,9 @@ string Student::getDegree() {
 }
 string Student::getMajor() {
 	return this->major;
+}
+Transcript* Student::getTranscript() {
+	return this->transcript;
 }
 bool Student::isEnrolledIn(Section* section) {
 	for (auto i : this->sections) {
@@ -384,7 +404,9 @@ void Student::displayAll() {
 	this->display();
 	cout << "Enrolled Sections: " << endl;
 	for (auto i : this->sections) {
-		cout << "   -" << i->getSectionNo() << endl;
+		
+		cout << "   -" << i->getSectionNo() <<": " << this->getTranscript()->verifyCompletion(i->getCourse()) <<endl;
+		/*cout << i->getCourse()->getCourseNo() << endl;*/
 	}
 }
 //Professor
@@ -435,29 +457,26 @@ string Transcript::verifyCompletion(Course* course) {
 	for (auto i : this->entries) {
 		if (i->getSection()->getCourse() == course) {
 			if (i->getGrade() >= 5) {
-				return "gg passed W gamer";
+				return "Grade: " + to_string(i->getGrade()) + " ,gg passed W gamer";
 			}
 			else {
-				return "L bozo";
+				return "Grade: " + to_string(i->getGrade()) + " ,L rip lol";
 			}
 		}
 	}
 	return "Bro hasn't completed the course";
 }
-void Transcript::display() {
-	cout << "   >Transcript for: " << this->student->getName() << endl;
-	for (auto i : this->entries) {
-		cout << "    +Section: " << i->getSection()->getSectionNo() << ", Grade: " << i->getGrade() << endl;
-	}
-	if (this->entries.empty()) {
-		cout << "    -No entries found." << endl;
-	}
-}
+//void Transcript::display() {
+//	cout << "   >Transcript for: " << this->student->getName() << endl;
+//	for (auto i : this->entries) {
+//		cout << "    +Section: " << i->getSection()->getSectionNo() << ", Grade: " << i->getGrade() << endl;
+//	}
+//	if (this->entries.empty()) {
+//		cout << "    -No entries found." << endl;
+//	}
+//}
 //TranscriptEntry
-TranscriptEntry::TranscriptEntry(float grade,Section* section) {
-	this->setGrade(grade);
-	this->setSection(section);
-}
+
 void TranscriptEntry::setGrade(float grade) {
 	this->grade = grade;
 }
@@ -470,54 +489,96 @@ void TranscriptEntry::setSection(Section* section) {
 Section* TranscriptEntry::getSection() {
 	return this->section;
 }
-// Main function to demonstrate the classes
+TranscriptEntry::TranscriptEntry(float grade, Section* section) {
+	this->setGrade(grade);
+	this->setSection(section);
+}
 int main() {
-	// Create courses
-	Course* course1 = new Course("Data Structures", "CS101", 3);
-	Course* course2 = new Course("Algorithms", "CS102", 3);
-	Course* course3 = new Course("Operating Systems", "CS103", 4);
-	// Add prerequisites
-	course2->addPrerequisite(course1);
-	course3->addPrerequisite(course2);
-	// Create sections
-	Section* section1 = new Section("001", "Monday", "10:00 AM", "Room 101", 30);
-	Section* section2 = new Section("002", "Wednesday", "11:00 AM", "Room 102", 30);
-	// Set course for sections
-	section1->setCourse(course1);
-	section2->setCourse(course2);
-	// Create a professor
-	Professor* prof1 = new Professor("123-45-6789", "Dr. Smith", "Associate Professor", "Computer Science");
-	prof1->agreeToTeach(section1);
-	prof1->agreeToTeach(section2);
-	// Create students
-	Student* student1 = new Student("987-65-4321", "Alice Johnson", "Bachelor of Science", "Computer Science");
-	Student* student2 = new Student("876-54-3210", "Bob Smith", "Bachelor of Arts", "Mathematics");
-	// Enroll students in sections
-	section1->enroll(student1);
-	section2->enroll(student2);
-	// Create a schedule of classes
-	ScheduleOfClasses schedule("Fall 2023");
-	schedule.addSection(section1);
-	schedule.addSection(section2);
-	// Display the schedule of classes
-	schedule.display();
-	// Display course details
-	course1->display();
-	course2->display();
-	course3->display();
-	// Display student details
-	student1->displayAll();
-	student2->displayAll();
-	// Display professor details
-	prof1->displayAll();
-	// Clean up memory
-	delete course1;
-	delete course2;
-	delete course3;
-	delete section1;
-	delete section2;
-	delete prof1;
-	delete student1;
-	delete student2;
+/*
+public class MainTest {
+	public static void main(String[] args) {
+		Course oop = new Course("MTH10407", "OOP", 4);
+		Section oop23_24_3 = oop.scheduleSection("MTH10407-24-25-2", "Tue", "8:00AM", "F202", 100);
+		Student alice = new Student("001", "Alice", "Maths", "Bachelor");
+		oop23_24_3.enroll(alice);
+		oop23_23_3.postGrade(alice, 9);
+
+		Course dsa = new Course("MTH10405", "DSA", 4);
+		Section dsa23_24_3 = dsa.scheduleSection("MTH10405-24-25-2", "Wed", "8:00AM", "E202A", 100);
+		dsa23_24_3.enroll(alice);
+		dsa23_23_3.postGrade(alice, 8);
+
+		alice.printTranscript();
+	}
+}
+*/
+	/* test case lab
+	Course* oop = new Course("MTH10407", "OOP", 4);
+	Section* oop23_24_3 = new Section("MTH10407-24-25-2", "Tue", "8:00AM", "F202", 100);
+	oop->scheduleSection(oop23_24_3);
+	Student* alice = new Student("001", "Alice", "Maths", "Bachelor");
+	oop23_24_3->enroll(alice);
+	oop23_24_3->postGrade(alice, 4);
+	Course* dsa = new Course("MTH10405", "DSA", 4);
+	Section* dsa23_24_3 = new Section("MTH10405-24-25-2", "Wed", "8:00AM", "E202A", 100);
+	dsa->scheduleSection(dsa23_24_3);
+	dsa23_24_3->enroll(alice);
+	dsa23_24_3->postGrade(alice, 8);
+	alice->displayAll();
+	//alice->getTranscript()->display();
+	*/
+	
+
+	//Students:
+	Student* A1 = new Student("001", "NPC1", "Comsci Maths", "Bachelor");
+	Student* A2 = new Student("002", "NPC2", "App Maths", "Bachelor");
+	Student* A3 = new Student("003", "NPC3", "App Maths", "Bachelor");
+	Student* A4 = new Student("004", "NPC4", "Maths", "Bachelor");
+	Student* A5 = new Student("005", "NPC5", "Comsci Maths", "Bachelor");
+	//Professors:
+	Professor* B1 = new Professor("001", "BOSS1", "Dr.STONE", "Comsci");
+	Professor* B2 = new Professor("002", "BOSS2", "Dr.STRANGE", "Comsci");
+	Professor* B3 = new Professor("003", "BOSS3", "Dr.COKE", "Maths");
+
+	//Schedule of Classes:
+	ScheduleOfClasses* schedule = new ScheduleOfClasses("2024 - 2045");
+	//Courses:
+	Course* OOP = new Course("MTH10407", "OOP", 4);
+	Course* DSA = new Course("MTH10405", "DSA", 4);
+	Course* AI = new Course("MTH10408", "AI", 4);
+	Course* CSDL = new Course("MTH69420", "CSDLoz", 4);
+	//Prerequisites:
+	OOP->addPrerequisite(DSA);
+	//Sections:
+	Section* OOP_1 = new Section("MTH10407-24-25-1", "Tue", "8:00AM", "F102", 60, schedule, OOP);
+	Section* OOP_2 = new Section("MTH10407-24-25-2", "Wed", "8:00AM", "F202", 80, schedule, OOP);
+	Section* OOP_3 = new Section("MTH10407-24-25-2", "Mon", "8:00AM", "F302", 100, schedule, OOP);
+	Section* DSA_1 = new Section("MTH10405-24-25-1", "Tue", "8:00AM", "F402", 60, schedule, DSA);
+	Section* DSA_2 = new Section("MTH10405-24-25-2", "Wed", "8:00AM", "F502", 90, schedule, DSA);
+	Section* AI_1 = new Section("MTH10408-24-25-1", "Thu", "8:00AM", "F602", 100, schedule, AI);
+	Section* CSDL_1 = new Section("MTH69420-24-25-1", "Fri", "8:00AM", "F702", 120, schedule, CSDL);
+	//Professors agree to teach:
+	B1->agreeToTeach(OOP_1);
+	B1->agreeToTeach(OOP_2);
+	B1->agreeToTeach(DSA_1);
+	B2->agreeToTeach(OOP_3);
+	B2->agreeToTeach(DSA_2);
+	B3->agreeToTeach(AI_1);
+	B3->agreeToTeach(CSDL_1);
+	//.....
+	OOP_1->enroll(A1);  // Should succeed
+	OOP_1->enroll(A2);  // Should succeed
+	OOP_1->enroll(A3);  // Should succeed
+	OOP_1->enroll(A5);  // Should succeed
+
+	// Try enrolling failed students in OOP (should be denied or logged as failed)
+	OOP_2->enroll(A4);  // Should fail
+	OOP_2->enroll(A3);  // Should fail
+
+	// Enroll a few students in AI and CSDL
+	AI_1->enroll(A1);
+	AI_1->enroll(A2);
+	CSDL_1->enroll(A3);
+	CSDL_1->enroll(A4);
 	return 0;
 }
