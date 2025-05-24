@@ -552,28 +552,32 @@ public class MainTest {
 	//Sections:
 	Section* OOP_1 = new Section("MTH10407-24-25-1", "Tue", "8:00AM", "F102", 60, schedule, OOP);
 	Section* OOP_2 = new Section("MTH10407-24-25-2", "Wed", "8:00AM", "F202", 80, schedule, OOP);
-	Section* OOP_3 = new Section("MTH10407-24-25-2", "Mon", "8:00AM", "F302", 100, schedule, OOP);
 	Section* DSA_1 = new Section("MTH10405-24-25-1", "Tue", "8:00AM", "F402", 60, schedule, DSA);
-	Section* DSA_2 = new Section("MTH10405-24-25-2", "Wed", "8:00AM", "F502", 90, schedule, DSA);
 	Section* AI_1 = new Section("MTH10408-24-25-1", "Thu", "8:00AM", "F602", 100, schedule, AI);
 	Section* CSDL_1 = new Section("MTH69420-24-25-1", "Fri", "8:00AM", "F702", 120, schedule, CSDL);
 	//Professors agree to teach:
 	B1->agreeToTeach(OOP_1);
 	B1->agreeToTeach(OOP_2);
-	B1->agreeToTeach(DSA_1);
-	B2->agreeToTeach(OOP_3);
-	B2->agreeToTeach(DSA_2);
+	B2->agreeToTeach(DSA_1);
 	B3->agreeToTeach(AI_1);
 	B3->agreeToTeach(CSDL_1);
-	//.....
-	OOP_1->enroll(A1);  // Should succeed
-	OOP_1->enroll(A2);  // Should succeed
-	OOP_1->enroll(A3);  // Should succeed
-	OOP_1->enroll(A5);  // Should succeed
+	//Enroll
+	DSA_1->enroll(A1); 
+	DSA_1->enroll(A2); 
+	DSA_1->enroll(A3); 
+	DSA_1->enroll(A4); 
+	DSA_1->enroll(A5);
+	DSA_1->postGrade(A1, 8);
+	DSA_1->postGrade(A2, 7);
+	DSA_1->postGrade(A3, 3);
+	DSA_1->postGrade(A4, 4);
+	DSA_1->postGrade(A5, 10);
 
-	// Try enrolling failed students in OOP (should be denied or logged as failed)
-	OOP_2->enroll(A4);  // Should fail
-	OOP_2->enroll(A3);  // Should fail
+	OOP_1->enroll(A1);
+	OOP_2->enroll(A2);
+	OOP_1->enroll(A3);
+	OOP_2->enroll(A4);
+	OOP_1->enroll(A5);
 
 	// Enroll a few students in AI and CSDL
 	AI_1->enroll(A1);
