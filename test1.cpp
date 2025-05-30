@@ -19,7 +19,7 @@
 //
 //Hiển thị lại thông tin của khách hàng thứ 2 và các chiếc xe mà khách hàng đó đang mượn.
 
-
+/*
 #include<iostream>
 #include<string>
 #include<list>
@@ -116,7 +116,7 @@ void Customer::displayCar() {
         i->display();
     }
 }
-
+*/
 //int main() {
 //    Customer* c1 = new Customer("001", "A");
 //    Customer* c2 = new Customer("002", "B");
@@ -184,3 +184,4 @@ Hang xe: Toyota
 Ma DK: 2
 Hang xe: Lambo
 */
+

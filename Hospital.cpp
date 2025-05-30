@@ -1,390 +1,295 @@
+﻿/*
+Một bệnh viện bao gồm nhiều khoa. Mỗi khoa có một tên riêng.
+
+Mỗi khoa có nhiều bệnh nhân. Bệnh nhân có các thông tin về tên, ngày sinh. Bệnh nhân chỉ ở trong một khoa duy nhất.
+
+Các bác sĩ trong bệnh viện được tổ chức theo nhóm. Mỗi bác sĩ chỉ ở trong một nhóm. Mỗi nhóm có một mã nhóm duy nhất. Mỗi nhóm được lãnh đạo bởi một bác sĩ (cố vấn) duy nhất. Bác sĩ có các thông tin về tên, địa chỉ.
+
+Mỗi bệnh nhân khi nhập bệnh viện được điều trị bởi một nhóm bác sĩ duy nhất. Bác sĩ cố vấn của nhóm đó chịu trách nhiệm về bệnh nhân.
+
+Chương trình cần quản lý các thông tin sau:
+Các khoa.
+Các bác sĩ, và nhóm của bác sĩ đó.
+Bệnh nhân và phòng bệnh của bệnh nhân khi nhập viện. Hiển thị thông tin bác sĩ tư vấn chịu trách nhiệm cho bệnh nhân đó. Hiển thị nhóm bác sĩ đang điều trị cho bệnh nhân.
+*/
 #include<iostream>
 #include<string.h>
 #include<list>
 #include<map>
 using namespace std;
-class Employee;
-class Doctor;
-class Advisor;
+
 class Hospital;
 class Faculty;
 class Patient;
+class Doctor;
+class Advisor;
+class Employee;
 
-class Employee{
+class Hospital {
+private:
+	string name;
+	map<string, Faculty*> faculties;
+	map<string, Employee*> employees;
+public:
+	Hospital(string name);
+	void setName(string name);
+	string getName();
+	void addEmployee(Employee* employee);
+	void addFaculty(Faculty* faculty);
+	void display();
+};
+class Employee {
 private:
 	string name;
 	string address;
-	Hospital* hospital;
 public:
-	Employee(string name,string address);
-
-	//Getter & Setter
+	Employee(string name, string address);
 	void setName(string name);
 	void setAddress(string address);
-	void setHospital(Hospital* hospital);
-
 	string getName();
 	string getAddress();
-	Hospital* getHospital();
-
-	//Other Methods
 	virtual void display();
 };
-
-class Doctor:public Employee{
-private:
-	string roomID;
-	Advisor* advisor;
-public:
-	Doctor(string name,string address,string roomID);
-
-	//Getter & Setter
-	void setRoomID(string roomID);
-	void setAdvisor(Advisor* advisor);
-
-	string getRoomID();
-	Advisor* getAdvisor();
-	//Other Methods
-	void display();
-};
-
-class Advisor:public Doctor{
-private:
-	list<Patient*> patients;
-	list<Doctor*> doctors;
-public:
-	Advisor(string name,string address,string roomID);
-	//Setter & Getter 
-	void curePatient(string name,string dateOfBirth,string roomID);
-	void setDoctor(Doctor* doctor);
-
-	list<Patient*> getPatients();
-	list<Doctor*> getDoctor();
-	//Other Methods
-	void display();
-	void displayDoctor();
-};
-
-class Hospital{
-private:
-	string name;
-	list<Faculty*> faculties;
-	list<Employee*> employees;
-public:
-	Hospital(string name);
-
-	//Setter & Getter
-	void setName(string name);
-	void setFaculty(Faculty* faculty);
-	void setEmployee(Employee* employee);
-
-	string getName();
-	list<Faculty*> getFaculties();
-	list<Employee*> getEmployee();
-	//Other Methods
-	void display();
-
-};
-
-class Faculty{
+class Faculty {
 private:
 	string name;
 	list<Patient*> patients;
 public:
 	Faculty(string name);
-	//Setter & Getter
 	void setName(string name);
-	void setPatient(Patient* patient);
-
 	string getName();
-	list<Patient*> getPatient();
-	//Other Methods
-	void display();
+	void addPatient(Patient* patient);
+	virtual void display();
 };
-
-class Patient{
+class Patient {
 private:
 	string name;
-	string dateOfBirth;
-	string roomID;
+	string birthday;
+	string room;
+	Faculty* faculty;
 	Advisor* advisor;
 public:
-	Patient(string name,string dateOfBirth,string roomID);
-
-	//Setter & Getter
+	Patient(string name, string birthday, string room);
 	void setName(string name);
-	void setDateOfBirth(string dateOfBirth);
-	void setRoomID(string roomID);
-	void registerCure(Advisor* advisor);
-
+	void setBirthday(string birthday);
+	void setRoom(string room);
+	void setFaculty(Faculty* faculty);
+	void setAdvisor(Advisor* advisor);	
 	string getName();
-	string getDateOfBirth();
-	string getRoomID();
-	Advisor* getAdvisor();
-
-	//Other Methods
+	string getBirthday();
+	string getRoom();
 	void display();
-
 };
-//Class Employee
+class Doctor :public Employee {
+private:
+	int groupID;
+	Advisor* advisor;
+public:
+	Doctor(string name,string address,int id);
+	void setRoomID(int roomID);
+	void setAdvisor(Advisor* advisor);
+	int getGroupID();
+	void display();
+};
+class Advisor :public Doctor {
+private:
+	list<Patient*> patients;
+	list<Doctor*> doctors;
+public:
+	Advisor(string name, string address, int id);
+	void registration(Patient* patient);
+	void addDoctor(Doctor* doctor);
+	void display();
+};
+//Hospital
+Hospital::Hospital(string name) {
+	this->setName(name);
+}
+void Hospital::setName(string name) {
+	this->name = name;
+}
+string Hospital::getName() {
+	return this->name;
+}
+void Hospital::addEmployee(Employee* employee) {
+	employees[employee->getName()] = employee;
+}
+void Hospital::addFaculty(Faculty* faculty) {
+	faculties[faculty->getName()] = faculty;
+}
+void Hospital::display() {
+	cout << "Hospital Name: " << this->getName() << endl;
+	cout << "Employees: " << endl;
+	for (auto i : this->employees) {
+		i.second->display();
+	}
+	cout << "Faculties: " << endl;
+	for (auto i : this->faculties) {
+		i.second->display();
+	}
+}
+//Employee
 Employee::Employee(string name, string address) {
-    this->setName(name);
-    this->setAddress(address);
+	this->setName(name);
+	this->setAddress(address);
 }
-
 void Employee::setName(string name) {
-    this->name = name;
+	this->name = name;
 }
-
 void Employee::setAddress(string address) {
-    this->address = address;
+	this->address = address;
 }
-
-void Employee::setHospital(Hospital* hospital){
-	this->hospital = hospital;
-}
-
 string Employee::getName() {
-    return this->name;
+	return this->name;
 }
-
 string Employee::getAddress() {
-    return this->address;
+	return this->address;
 }
-
-Hospital* Employee::getHospital(){
-	return this->hospital;
+void Employee::display() {
+	cout << "-- Name: " << this->getName() << endl;
+	cout << "-- Address: " << this->getAddress() << endl;
 }
-
-void Employee::display(){
-	cout<<"Name : " << this->getName()<<'\n'<< "Address : " << this->getAddress()<<"\n";
+//Faculty
+Faculty::Faculty(string name) {
+	this->setName(name);
 }
-
-
-//Class Doctor
-Doctor::Doctor(string name,string address,string roomID):Employee(name,address) {
-    this->setRoomID(roomID);
+void Faculty::setName(string name) {
+	this->name = name;
 }
-
-void Doctor::setRoomID(string roomID) {
-    this->roomID = roomID;
+string Faculty::getName() {
+	return this->name;
 }
-
-void Doctor::setAdvisor(Advisor* advisor){
+void Faculty::addPatient(Patient* patient) {
+	this->patients.push_back(patient);
+	patient->setFaculty(this);
+}
+void Faculty::display() {
+	cout << "Faculty Name: " << this->getName() << endl;
+	cout << "Patients: " << endl;
+	for (auto i : this->patients) {
+		i->display();
+	}
+}
+//Patient
+Patient::Patient(string name, string birthday, string room) {
+	this->setName(name);
+	this->setBirthday(birthday);
+	this->setRoom(room);
+}
+void Patient::setName(string name) {
+	this->name = name;
+}
+void Patient::setBirthday(string birthday) {
+	this->birthday = birthday;
+}
+void Patient::setRoom(string room) {
+	this->room = room;
+}
+void Patient::setFaculty(Faculty* faculty) {
+	this->faculty = faculty;
+}
+void Patient::setAdvisor(Advisor* advisor) {
 	this->advisor = advisor;
 }
-
-string Doctor::getRoomID() {
-    return this->roomID;
+string Patient::getName() {
+	return this->name;
 }
-
-Advisor* Doctor::getAdvisor(){
-	return this->advisor;
+string Patient::getBirthday() {
+	return this->birthday;
 }
-
-void Doctor::display(){
+string Patient::getRoom() {
+	return this->room;
+}
+void Patient::display() {
+	cout << "----Patient Name: " << this->getName() << endl;
+	cout << "----Birthday: " << this->getBirthday() << endl;
+	cout << "----Room: " << this->getRoom() << endl;
+	if (this->advisor) {
+		cout << "----Advisor: " << this->advisor->getName() << endl;
+	}
+	if (this->faculty) {
+		cout << "----Faculty: " << this->faculty->getName() << endl;
+	}
+}
+Doctor::Doctor(string name, string address, int id) : Employee(name, address) {
+	this->setRoomID(id);
+}
+void Doctor::setRoomID(int id) {
+	this->groupID = id;
+}
+void Doctor::setAdvisor(Advisor* advisor) {
+	this->advisor = advisor;
+}
+int Doctor::getGroupID() {
+	return this->groupID;
+}
+void Doctor::display() {
 	Employee::display();
-	cout<<"RoomID :" << this->getRoomID() <<"\n\n";
+	cout << "-- Group ID: " << this->getGroupID() << endl;
 }
-
-//Class Advisor
-Advisor::Advisor(string name,string address,string roomID):Doctor(name,address,roomID){};
-
-void Advisor::curePatient(string name,string dateOfBirth,string roomID){
-	Patient* tmp = new Patient(name,dateOfBirth,roomID);
-	this->patients.push_back(tmp);
+Advisor::Advisor(string name, string address, int id) : Doctor(name,address,id) {
 }
-
-void Advisor::setDoctor(Doctor* doctor){
-	bool ok = true;
-	for(Doctor* it : this->doctors){
-		if(it == doctor ){
-			ok = false; break;
+void Advisor::registration(Patient* patient) {
+	this->patients.push_back(patient);
+	patient->setAdvisor(this);
+}
+void Advisor::addDoctor(Doctor* doctor) {
+	bool exists = false;
+	for (auto d : this->doctors) {
+		if (d->getName() == doctor->getName()) {
+			exists = true;
+			break;
 		}
 	}
-	if(ok){
+	if (!exists) {
 		this->doctors.push_back(doctor);
 		doctor->setAdvisor(this);
-}
 	}
-	
-
-list<Patient*> Advisor::getPatients(){
-	return patients;
 }
-
-list<Doctor*> Advisor::getDoctor(){
-	return doctors;
-}
-
-void Advisor::display(){
+void Advisor::display() {
+	cout << "Advisor Name: " << this->getName() << endl;
 	Doctor::display();
-}
-
-void Advisor::displayDoctor(){
-	cout<<"Information of group doctors that " << this->getName() << " managed\n" ;
-	int i=0;
-	for(auto it : this->doctors){
-		cout<<'#'<<++i<<'\n';
-		it->display();
-		cout<<'\n';
+	cout << "Patients: " << endl;
+	for (auto i : this->patients) {
+		i->display();
 	}
-	cout<<"================================"<<'\n';
+	cout << "Doctors under this advisor: " << endl;
+	for (auto i : this->doctors) {
+		i->display();
+	}
+	cout << "------------------------------" << endl;
 }
-//Class Hospital
-Hospital::Hospital(string name) {
-    this->setName(name);
-}
-
-void Hospital::setName(string name) {
-    this->name = name;
-}
-
-void Hospital::setFaculty(Faculty* faculty){
-	this->faculties.push_back(faculty);
-}
-
-void Hospital::setEmployee(Employee* employee){
-	this->employees.push_back(employee);
-	employee->setHospital(this);
-}
-
-string Hospital::getName() {
-    return this->name;
-}
-
-list<Faculty*> Hospital::getFaculties(){
-	return faculties;
-}
-
-list<Employee*> Hospital::getEmployee(){
-	return employees;
-}
-
-void Hospital::display(){
-	cout<<"Name Hospital : " << this->getName() <<"\n\n";
-}
-
-
-//Class Faculty
-Faculty::Faculty(string name) {
-    this->setName(name);
-}
-
-void Faculty::setName(string name) {
-    this->name = name;
-}
-
-void Faculty::setPatient(Patient* patient){
-	this->patients.push_back(patient);
-}
-
-string Faculty::getName() {
-    return this->name;
-}
-
-list<Patient*> Faculty::getPatient(){
-	return patients;
-}
-
-void Faculty::display(){
-	cout<<"Name of Faculty: "<< this->getName() <<"\n\n";
-}
-
-//Class Patient
-Patient::Patient(string name, string dateOfBirth, string roomID) {
-    this->setName(name);
-    this->setDateOfBirth(dateOfBirth);
-    this->setRoomID(roomID);
-}
-
-void Patient::setName(string name) {
-    this->name = name;
-}
-
-void Patient::setDateOfBirth(string dateOfBirth) {
-    this->dateOfBirth = dateOfBirth;
-}
-
-void Patient::setRoomID(string roomID) {
-    this->roomID = roomID;
-}
-
-void Patient::registerCure(Advisor* advisor){
-	this->advisor = advisor;
-	advisor->curePatient(this->getName(), this->getDateOfBirth(), this->getRoomID());
-}
-
-string Patient::getName() {
-    return this->name;
-}
-
-string Patient::getDateOfBirth() {
-    return this->dateOfBirth;
-}
-
-string Patient::getRoomID() {
-    return this->roomID;
-}
-
-Advisor* Patient::getAdvisor(){
-	return this->advisor;
-}
-
-void Patient::display(){
-	cout<<"Name Patient : "<< this->getName() <<'\n';
-	cout<<"DateOfBirth : "<< this->getDateOfBirth() <<'\n';
-	cout<<"Room ID: "<< this->getRoomID()<<"\n\n";
-}
-int main(){
-	ios::sync_with_stdio(0);
-	cin.tie(0);
-	Hospital* h = new Hospital("Bach Mai");
-	Faculty* external = new Faculty("Khoa noi");
-	Doctor* d1 = new Doctor("Nguyen Van A","Ha Noi","P100");
-	Doctor* d2 = new Doctor("Nguyen Van B","Ha Noi","P101");
-	Doctor* d3 = new Doctor("Nguyen Van C","Ha Noi","P101");
-	Doctor* d4 = new Doctor("Nguyen Van D","Ha Noi","P102");
-	Advisor* a = new Advisor("Nguyen Van Muoi","Ha Noi","110");
-	Advisor* b = new Advisor("Louis Pierre ","Paris","111");
-	Patient* p = new Patient("Nguyen Thi Dao","04/12/1997","210");
-	Patient* p1 = new Patient("Le Van Teo","07/04/2000","201");
-	h->setEmployee(d1);
-	h->setEmployee(d2);
-	h->setEmployee(d3);
-	h->setEmployee(d4);
-	h->setEmployee(a);
-	h->setEmployee(b);
-	h->setFaculty(external);
-	a->setDoctor(d1);
-	a->setDoctor(d2);
-	b->setDoctor(d3);
-	b->setDoctor(d4);
-	p->registerCure(a);
-	p1->registerCure(b);
-	h->display();
-	external->display();
-	cout<<"Benh nhan " << p->getName() <<'\n';
-	cout<<"Thong tin"<<'\n';
-	p->display();
-	cout<< "Thong tin bac si dieu tri\n";
-	a->display();
-	a->displayDoctor();
-	cout<<"Benh nhan " << p1->getName() <<'\n';
-	cout<<"Thong tin"<<'\n';
-	p1->display();
-	cout<< "Thong tin bac si dieu tri\n";
-	b->display();
-	b->displayDoctor();
-	delete h;
-	delete external;
-	delete d1;
-	delete d2;
-	delete d3;
-	delete d4;
-	delete a;
-	delete b;
-	delete p;
-	delete p1;
-	return 0;
-}
+//int main() {
+//	Hospital* hospital = new Hospital("City Hospital");
+//	Faculty* cardiology = new Faculty("Cardiology");
+//	Employee* emp1 = new Employee("Alice", "123 Main St");
+//	Employee* emp2 = new Employee("Bob", "456 Elm St");
+//	Doctor* doc1 = new Doctor("Dr. Smith", "789 Oak St", 101);
+//	Doctor* doc2 = new Doctor("Dr. Jones", "321 Pine St", 102);
+//	Advisor* advisor1 = new Advisor("Dr. Brown", "654 Maple St", 201);
+//	Patient* patient1 = new Patient("John Doe", "01/01/1990", "Room 101");
+//	Patient* patient2 = new Patient("Jane Doe", "02/02/1992", "Room 102");
+//	hospital->addEmployee(emp1);
+//	hospital->addEmployee(emp2);
+//	hospital->addEmployee(doc1);
+//	hospital->addEmployee(doc2);
+//	hospital->addEmployee(advisor1);
+//	hospital->addFaculty(cardiology);
+//	cardiology->addPatient(patient1);
+//	cardiology->addPatient(patient2);
+//	advisor1->registration(patient1);
+//	advisor1->registration(patient2);
+//	advisor1->addDoctor(doc1);
+//	advisor1->addDoctor(doc2);
+//	hospital->display();
+//	delete hospital;
+//	delete cardiology;
+//	delete emp1;
+//	delete emp2;
+//	delete doc1;
+//	delete doc2;
+//	delete advisor1;
+//	delete patient1;
+//	delete patient2;
+//	return 0;
+//}
