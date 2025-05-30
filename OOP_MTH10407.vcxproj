@@ -127,6 +127,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Hospital.cpp" />
+    <ClCompile Include="Hotel.cpp" />
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="SoftwareHouse.cpp" />
     <ClCompile Include="SoftwareHouse_Modify.cpp" />
