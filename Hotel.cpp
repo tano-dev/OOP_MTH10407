@@ -255,45 +255,45 @@ void ConferenceRoom::display() {
 }
 
 
-int main() {
-	Hotel* hotel = new Hotel("Grand Hotel");
-
-	Floor* floor1 = new Floor("1");
-	Floor* floor2 = new Floor("2");
-
-	RestRoom* restRoom1 = new RestRoom("01");
-	RestRoom* restRoom2 = new RestRoom("02");
-
-	StudyRoom* studyRoom1 = new StudyRoom("01");
-	StudyRoom* studyRoom2 = new StudyRoom("02");
-
-	ConferenceRoom* conferenceRoom1 = new ConferenceRoom("01", "Lac Da");
-
-
-	floor1->addRoom(restRoom1);
-	floor1->addRoom(restRoom2);
-	floor2->addRoom(conferenceRoom1);
-	conferenceRoom1->addStudyRoom(studyRoom1);
-	conferenceRoom1->addStudyRoom(studyRoom2);
-	hotel->addFloor(floor1);
-	hotel->addFloor(floor2);
-
-	Customer* customer1 = new Customer("Alice", "123456789");
-	customer1->bookRoom(restRoom1);
-	customer1->bookRoom(conferenceRoom1);
-
-	hotel->addCustomer(customer1);
-
-	hotel->display();
-	customer1->displayRooms();
-
-	delete hotel;
-	delete floor1;
-	delete floor2;
-	delete restRoom1;
-	delete restRoom2;
-	delete studyRoom1;
-	delete studyRoom2;
-	delete conferenceRoom1;
-	return 0;
-}
+//int main() {
+//	Hotel* hotel = new Hotel("Grand Hotel");
+//
+//	Floor* floor1 = new Floor("1");
+//	Floor* floor2 = new Floor("2");
+//
+//	RestRoom* restRoom1 = new RestRoom("01");
+//	RestRoom* restRoom2 = new RestRoom("02");
+//
+//	StudyRoom* studyRoom1 = new StudyRoom("01");
+//	StudyRoom* studyRoom2 = new StudyRoom("02");
+//
+//	ConferenceRoom* conferenceRoom1 = new ConferenceRoom("01", "Lac Da");
+//
+//
+//	floor1->addRoom(restRoom1);
+//	floor1->addRoom(restRoom2);
+//	floor2->addRoom(conferenceRoom1);
+//	conferenceRoom1->addStudyRoom(studyRoom1);
+//	conferenceRoom1->addStudyRoom(studyRoom2);
+//	hotel->addFloor(floor1);
+//	hotel->addFloor(floor2);
+//
+//	Customer* customer1 = new Customer("Alice", "123456789");
+//	customer1->bookRoom(restRoom1);
+//	customer1->bookRoom(conferenceRoom1);
+//
+//	hotel->addCustomer(customer1);
+//
+//	hotel->display();
+//	customer1->displayRooms();
+//
+//	delete hotel;
+//	delete floor1;
+//	delete floor2;
+//	delete restRoom1;
+//	delete restRoom2;
+//	delete studyRoom1;
+//	delete studyRoom2;
+//	delete conferenceRoom1;
+//	return 0;
+//}
