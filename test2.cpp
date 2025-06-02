@@ -201,51 +201,51 @@ void Nhanvien::display() {
 	cout << "   +ID: " << this->getId() << endl;
 }
 
-int main() {
-	University* uni = new University("KHTN");
-
-	Phong* phong1 = new PhongDaoTao();
-	Phong* phong2 = new PhongKhaoThi();
-	Khoa* khoa1 = new KhoaToan();
-	Khoa* khoa2 = new KhoaCNTT();
-	Khoa* khoa3 = new KhoaSinh();
-
-	Nhanvien* nv1 = new Nhanvien("Nguyen Van Phuc Huy", "23110163");
-	Nhanvien* nv2 = new Nhanvien("Nguyen A", "23110001");
-	Nhanvien* nv3 = new Nhanvien("Nguyen B", "23110002");
-	Nhanvien* nv4 = new Nhanvien("Nguyen C", "23110003");
-
-	uni->addPhong(phong1);
-	uni->addPhong(phong2);
-	uni->addKhoa(khoa1);
-	uni->addKhoa(khoa2);
-	uni->addKhoa(khoa3);
-
-	phong1->addNhanvien(nv1);
-	phong1->addNhanvien(nv4);
-	phong2->addNhanvien(nv2);
-	phong2->addNhanvien(nv3);
-
-	khoa1->addNhanvien(nv3);
-	khoa1->addNhanvien(nv4);
-	khoa2->addNhanvien(nv1);
-	khoa2->addNhanvien(nv2);
-	khoa3->addNhanvien(nv4);
-
-	uni->display();
-
-	delete uni;
-	delete phong1;
-	delete phong2;
-	delete khoa1;
-	delete khoa2;
-	delete nv1;
-	delete nv2;
-	delete nv3;
-	delete nv4;
-
-	return 0;
-}
+//int main() {
+//	University* uni = new University("KHTN");
+//
+//	Phong* phong1 = new PhongDaoTao();
+//	Phong* phong2 = new PhongKhaoThi();
+//	Khoa* khoa1 = new KhoaToan();
+//	Khoa* khoa2 = new KhoaCNTT();
+//	Khoa* khoa3 = new KhoaSinh();
+//
+//	Nhanvien* nv1 = new Nhanvien("Nguyen Van Phuc Huy", "23110163");
+//	Nhanvien* nv2 = new Nhanvien("Nguyen A", "23110001");
+//	Nhanvien* nv3 = new Nhanvien("Nguyen B", "23110002");
+//	Nhanvien* nv4 = new Nhanvien("Nguyen C", "23110003");
+//
+//	uni->addPhong(phong1);
+//	uni->addPhong(phong2);
+//	uni->addKhoa(khoa1);
+//	uni->addKhoa(khoa2);
+//	uni->addKhoa(khoa3);
+//
+//	phong1->addNhanvien(nv1);
+//	phong1->addNhanvien(nv4);
+//	phong2->addNhanvien(nv2);
+//	phong2->addNhanvien(nv3);
+//
+//	khoa1->addNhanvien(nv3);
+//	khoa1->addNhanvien(nv4);
+//	khoa2->addNhanvien(nv1);
+//	khoa2->addNhanvien(nv2);
+//	khoa3->addNhanvien(nv4);
+//
+//	uni->display();
+//
+//	delete uni;
+//	delete phong1;
+//	delete phong2;
+//	delete khoa1;
+//	delete khoa2;
+//	delete nv1;
+//	delete nv2;
+//	delete nv3;
+//	delete nv4;
+//
+//	return 0;
+//}
 
 /*
 output:
