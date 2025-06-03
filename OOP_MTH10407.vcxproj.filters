@@ -30,11 +30,14 @@
     <ClCompile Include="SRS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test2.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
     <ClCompile Include="Hotel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Hospital.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
