@@ -28,6 +28,7 @@ public:
 	string getCourseName();
 	string getCourseNo();
 	int getCredits();
+	list<Course*> getPrerequisites();
 	void scheduleSection(Section* section);
 	void addPrerequisite(Course* course);
 	bool hasPrerequisites();
@@ -136,7 +137,8 @@ public:
 	Transcript(Student* student);
 	void setStudent(Student* student);
 	void addEntry(TranscriptEntry* entry);
-	string verifyCompletion(Course* course);
+	string verifyCompletionDisplay(Course* course);
+	bool verifyCompletion(Course* course);
 	//void display();
 };
 class TranscriptEntry {
@@ -177,6 +179,10 @@ string Course::getCourseNo() {
 int Course::getCredits() {
 	return this->credits;
 }
+list<Course*> Course::getPrerequisites() {
+	return this->prerequisites;
+}
+
 void Course::scheduleSection(Section* section) {
 	this->sections.push_back(section);
 	section->setCourse(this);
@@ -273,6 +279,14 @@ void Section::setCourse(Course* course) {
 }
 void Section::enroll(Student* student) {
 	if (this->comfirmSeatAvailability() && !student->isEnrolledIn(this)) {
+		if (this->course->hasPrerequisites()) {
+			for (auto i : this->getCourse()->getPrerequisites()) {
+				if (!student->getTranscript()->verifyCompletion(i)) {
+					cout <<  student->getName() << " not enough level for " << this->course->getCourseName() << endl;
+					return;
+				}
+			}
+		}
 		this->students.push_back(student);
 		student->addSection(this);
 	}
@@ -405,7 +419,7 @@ void Student::displayAll() {
 	cout << "Enrolled Sections: " << endl;
 	for (auto i : this->sections) {
 		
-		cout << "   -" << i->getSectionNo() <<": " << this->getTranscript()->verifyCompletion(i->getCourse()) <<endl;
+		cout << "   -" << i->getSectionNo() <<": " << this->getTranscript()->verifyCompletionDisplay(i->getCourse()) <<endl;
 		/*cout << i->getCourse()->getCourseNo() << endl;*/
 	}
 }
@@ -453,7 +467,7 @@ void Transcript::setStudent(Student* student) {
 void Transcript::addEntry(TranscriptEntry* entry) {
 	this->entries.push_back(entry);
 }
-string Transcript::verifyCompletion(Course* course) {
+string Transcript::verifyCompletionDisplay(Course* course) {
 	for (auto i : this->entries) {
 		if (i->getSection()->getCourse() == course) {
 			if (i->getGrade() >= 5) {
@@ -466,6 +480,20 @@ string Transcript::verifyCompletion(Course* course) {
 	}
 	return "Bro hasn't completed the course";
 }
+bool Transcript::verifyCompletion(Course* course) {
+	for (auto i : this->entries) {
+		if (i->getSection()->getCourse() == course) {
+			if (i->getGrade() >= 5) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+	return false;
+}
+
 //void Transcript::display() {
 //	cout << "   >Transcript for: " << this->student->getName() << endl;
 //	for (auto i : this->entries) {
@@ -546,7 +574,7 @@ public class MainTest {
 	Course* OOP = new Course("MTH10407", "OOP", 4);
 	Course* DSA = new Course("MTH10405", "DSA", 4);
 	Course* AI = new Course("MTH10408", "AI", 4);
-	Course* CSDL = new Course("MTH69420", "CSDLoz", 4);
+	Course* CSDL = new Course("MTH69420", "CSDL free fire", 4);
 	//Prerequisites:
 	OOP->addPrerequisite(DSA);
 	//Sections:
@@ -579,7 +607,6 @@ public class MainTest {
 	OOP_2->enroll(A4);
 	OOP_1->enroll(A5);
 
-	// Enroll a few students in AI and CSDL
 	AI_1->enroll(A1);
 	AI_1->enroll(A2);
 	AI_1->enroll(A4);
@@ -587,8 +614,14 @@ public class MainTest {
 	CSDL_1->enroll(A3);
 	CSDL_1->enroll(A4);
 	CSDL_1->enroll(A5);
-	// Display all sections in the schedule
+	// Display
 	schedule->display();
+	cout << "-----------------------------------------------------------------------------------------------------------------------" << endl;
+	A1->displayAll();
+	A2->displayAll();
+	A3->displayAll();
+	A4->displayAll();
+	A5->displayAll();
 
 	return 0;
 }
