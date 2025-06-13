@@ -132,6 +132,7 @@
     <ClCompile Include="Library.cpp" />
     <ClCompile Include="SoftwareHouse.cpp" />
     <ClCompile Include="SoftwareHouse_Modify.cpp" />
+    <ClCompile Include="DiscreteStructure.cpp" />
     <ClCompile Include="SRS.cpp" />
     <ClCompile Include="test1.cpp" />
     <ClCompile Include="test2.cpp" />

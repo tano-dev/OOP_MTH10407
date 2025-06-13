@@ -521,107 +521,107 @@ TranscriptEntry::TranscriptEntry(float grade, Section* section) {
 	this->setGrade(grade);
 	this->setSection(section);
 }
-int main() {
-/*
-public class MainTest {
-	public static void main(String[] args) {
-		Course oop = new Course("MTH10407", "OOP", 4);
-		Section oop23_24_3 = oop.scheduleSection("MTH10407-24-25-2", "Tue", "8:00AM", "F202", 100);
-		Student alice = new Student("001", "Alice", "Maths", "Bachelor");
-		oop23_24_3.enroll(alice);
-		oop23_23_3.postGrade(alice, 9);
-
-		Course dsa = new Course("MTH10405", "DSA", 4);
-		Section dsa23_24_3 = dsa.scheduleSection("MTH10405-24-25-2", "Wed", "8:00AM", "E202A", 100);
-		dsa23_24_3.enroll(alice);
-		dsa23_23_3.postGrade(alice, 8);
-
-		alice.printTranscript();
-	}
-}
-*/
-	/* test case lab
-	Course* oop = new Course("MTH10407", "OOP", 4);
-	Section* oop23_24_3 = new Section("MTH10407-24-25-2", "Tue", "8:00AM", "F202", 100);
-	oop->scheduleSection(oop23_24_3);
-	Student* alice = new Student("001", "Alice", "Maths", "Bachelor");
-	oop23_24_3->enroll(alice);
-	oop23_24_3->postGrade(alice, 4);
-	Course* dsa = new Course("MTH10405", "DSA", 4);
-	Section* dsa23_24_3 = new Section("MTH10405-24-25-2", "Wed", "8:00AM", "E202A", 100);
-	dsa->scheduleSection(dsa23_24_3);
-	dsa23_24_3->enroll(alice);
-	dsa23_24_3->postGrade(alice, 8);
-	alice->displayAll();
-	//alice->getTranscript()->display();
-	*/
-	
-
-	//Students:
-	Student* A1 = new Student("001", "NPC1", "Comsci Maths", "Bachelor");
-	Student* A2 = new Student("002", "NPC2", "App Maths", "Bachelor");
-	Student* A3 = new Student("003", "NPC3", "App Maths", "Bachelor");
-	Student* A4 = new Student("004", "NPC4", "Maths", "Bachelor");
-	Student* A5 = new Student("005", "NPC5", "Comsci Maths", "Bachelor");
-	//Professors:
-	Professor* B1 = new Professor("001", "BOSS1", "Dr.STONE", "Comsci");
-	Professor* B2 = new Professor("002", "BOSS2", "Dr.STRANGE", "Comsci");
-	Professor* B3 = new Professor("003", "BOSS3", "Dr.COKE", "Maths");
-
-	//Schedule of Classes:
-	ScheduleOfClasses* schedule = new ScheduleOfClasses("2024 - 2045");
-	//Courses:
-	Course* OOP = new Course("MTH10407", "OOP", 4);
-	Course* DSA = new Course("MTH10405", "DSA", 4);
-	Course* AI = new Course("MTH10408", "AI", 4);
-	Course* CSDL = new Course("MTH69420", "CSDL free fire", 4);
-	//Prerequisites:
-	OOP->addPrerequisite(DSA);
-	//Sections:
-	Section* OOP_1 = new Section("MTH10407-24-25-1", "Tue", "8:00AM", "F102", 60, schedule, OOP);
-	Section* OOP_2 = new Section("MTH10407-24-25-2", "Wed", "8:00AM", "F202", 80, schedule, OOP);
-	Section* DSA_1 = new Section("MTH10405-24-25-1", "Tue", "8:00AM", "F402", 60, schedule, DSA);
-	Section* AI_1 = new Section("MTH10408-24-25-1", "Thu", "8:00AM", "F602", 100, schedule, AI);
-	Section* CSDL_1 = new Section("MTH69420-24-25-1", "Fri", "8:00AM", "F702", 120, schedule, CSDL);
-	//Professors agree to teach:
-	B1->agreeToTeach(OOP_1);
-	B1->agreeToTeach(OOP_2);
-	B2->agreeToTeach(DSA_1);
-	B3->agreeToTeach(AI_1);
-	B3->agreeToTeach(CSDL_1);
-	//Enroll
-	DSA_1->enroll(A1); 
-	DSA_1->enroll(A2); 
-	DSA_1->enroll(A3); 
-	DSA_1->enroll(A4); 
-	DSA_1->enroll(A5);
-	DSA_1->postGrade(A1, 8);
-	DSA_1->postGrade(A2, 7);
-	DSA_1->postGrade(A3, 3);
-	DSA_1->postGrade(A4, 4);
-	DSA_1->postGrade(A5, 10);
-
-	OOP_1->enroll(A1);
-	OOP_2->enroll(A2);
-	OOP_1->enroll(A3);
-	OOP_2->enroll(A4);
-	OOP_1->enroll(A5);
-
-	AI_1->enroll(A1);
-	AI_1->enroll(A2);
-	AI_1->enroll(A4);
-	AI_1->enroll(A5);
-	CSDL_1->enroll(A3);
-	CSDL_1->enroll(A4);
-	CSDL_1->enroll(A5);
-	// Display
-	schedule->display();
-	cout << "-----------------------------------------------------------------------------------------------------------------------" << endl;
-	A1->displayAll();
-	A2->displayAll();
-	A3->displayAll();
-	A4->displayAll();
-	A5->displayAll();
-
-	return 0;
-}
+//int main() {
+///*
+//public class MainTest {
+//	public static void main(String[] args) {
+//		Course oop = new Course("MTH10407", "OOP", 4);
+//		Section oop23_24_3 = oop.scheduleSection("MTH10407-24-25-2", "Tue", "8:00AM", "F202", 100);
+//		Student alice = new Student("001", "Alice", "Maths", "Bachelor");
+//		oop23_24_3.enroll(alice);
+//		oop23_23_3.postGrade(alice, 9);
+//
+//		Course dsa = new Course("MTH10405", "DSA", 4);
+//		Section dsa23_24_3 = dsa.scheduleSection("MTH10405-24-25-2", "Wed", "8:00AM", "E202A", 100);
+//		dsa23_24_3.enroll(alice);
+//		dsa23_23_3.postGrade(alice, 8);
+//
+//		alice.printTranscript();
+//	}
+//}
+//*/
+//	/* test case lab
+//	Course* oop = new Course("MTH10407", "OOP", 4);
+//	Section* oop23_24_3 = new Section("MTH10407-24-25-2", "Tue", "8:00AM", "F202", 100);
+//	oop->scheduleSection(oop23_24_3);
+//	Student* alice = new Student("001", "Alice", "Maths", "Bachelor");
+//	oop23_24_3->enroll(alice);
+//	oop23_24_3->postGrade(alice, 4);
+//	Course* dsa = new Course("MTH10405", "DSA", 4);
+//	Section* dsa23_24_3 = new Section("MTH10405-24-25-2", "Wed", "8:00AM", "E202A", 100);
+//	dsa->scheduleSection(dsa23_24_3);
+//	dsa23_24_3->enroll(alice);
+//	dsa23_24_3->postGrade(alice, 8);
+//	alice->displayAll();
+//	//alice->getTranscript()->display();
+//	*/
+//	
+//
+//	//Students:
+//	Student* A1 = new Student("001", "NPC1", "Comsci Maths", "Bachelor");
+//	Student* A2 = new Student("002", "NPC2", "App Maths", "Bachelor");
+//	Student* A3 = new Student("003", "NPC3", "App Maths", "Bachelor");
+//	Student* A4 = new Student("004", "NPC4", "Maths", "Bachelor");
+//	Student* A5 = new Student("005", "NPC5", "Comsci Maths", "Bachelor");
+//	//Professors:
+//	Professor* B1 = new Professor("001", "BOSS1", "Dr.STONE", "Comsci");
+//	Professor* B2 = new Professor("002", "BOSS2", "Dr.STRANGE", "Comsci");
+//	Professor* B3 = new Professor("003", "BOSS3", "Dr.COKE", "Maths");
+//
+//	//Schedule of Classes:
+//	ScheduleOfClasses* schedule = new ScheduleOfClasses("2024 - 2045");
+//	//Courses:
+//	Course* OOP = new Course("MTH10407", "OOP", 4);
+//	Course* DSA = new Course("MTH10405", "DSA", 4);
+//	Course* AI = new Course("MTH10408", "AI", 4);
+//	Course* CSDL = new Course("MTH69420", "CSDL free fire", 4);
+//	//Prerequisites:
+//	OOP->addPrerequisite(DSA);
+//	//Sections:
+//	Section* OOP_1 = new Section("MTH10407-24-25-1", "Tue", "8:00AM", "F102", 60, schedule, OOP);
+//	Section* OOP_2 = new Section("MTH10407-24-25-2", "Wed", "8:00AM", "F202", 80, schedule, OOP);
+//	Section* DSA_1 = new Section("MTH10405-24-25-1", "Tue", "8:00AM", "F402", 60, schedule, DSA);
+//	Section* AI_1 = new Section("MTH10408-24-25-1", "Thu", "8:00AM", "F602", 100, schedule, AI);
+//	Section* CSDL_1 = new Section("MTH69420-24-25-1", "Fri", "8:00AM", "F702", 120, schedule, CSDL);
+//	//Professors agree to teach:
+//	B1->agreeToTeach(OOP_1);
+//	B1->agreeToTeach(OOP_2);
+//	B2->agreeToTeach(DSA_1);
+//	B3->agreeToTeach(AI_1);
+//	B3->agreeToTeach(CSDL_1);
+//	//Enroll
+//	DSA_1->enroll(A1); 
+//	DSA_1->enroll(A2); 
+//	DSA_1->enroll(A3); 
+//	DSA_1->enroll(A4); 
+//	DSA_1->enroll(A5);
+//	DSA_1->postGrade(A1, 8);
+//	DSA_1->postGrade(A2, 7);
+//	DSA_1->postGrade(A3, 3);
+//	DSA_1->postGrade(A4, 4);
+//	DSA_1->postGrade(A5, 10);
+//
+//	OOP_1->enroll(A1);
+//	OOP_2->enroll(A2);
+//	OOP_1->enroll(A3);
+//	OOP_2->enroll(A4);
+//	OOP_1->enroll(A5);
+//
+//	AI_1->enroll(A1);
+//	AI_1->enroll(A2);
+//	AI_1->enroll(A4);
+//	AI_1->enroll(A5);
+//	CSDL_1->enroll(A3);
+//	CSDL_1->enroll(A4);
+//	CSDL_1->enroll(A5);
+//	// Display
+//	schedule->display();
+//	cout << "-----------------------------------------------------------------------------------------------------------------------" << endl;
+//	A1->displayAll();
+//	A2->displayAll();
+//	A3->displayAll();
+//	A4->displayAll();
+//	A5->displayAll();
+//
+//	return 0;
+//}

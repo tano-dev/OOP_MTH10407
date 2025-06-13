@@ -27,9 +27,6 @@
     <ClCompile Include="SoftwareHouse_Modify.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="SRS.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="test2.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
@@ -37,6 +34,12 @@
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Hotel.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscreteStructure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRS.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
