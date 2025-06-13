@@ -137,6 +137,9 @@
     <ClCompile Include="test1.cpp" />
     <ClCompile Include="test2.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="Input10A.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

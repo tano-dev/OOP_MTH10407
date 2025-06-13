@@ -103,11 +103,9 @@ int main()
         if (edgeListGen(edgeList, numEdges, numVertices, initlimit) < 0) return -1;
     }
     //Print the generated edgelist:
-    /*
     for(int i=0;i<numEdges;i++){
         printedge(edgeList[i]);
     }
-    */
     //Check the chosen function:
 Func_check func = BF;
 
@@ -134,7 +132,49 @@ return 0;
 
 */
 //main Function
+int main() {
 
+    int edgeList[70][3];
+    int numEdges = 70;
+    int Esize = 10;
+
+    ifstream fin("Input10A.txt");
+    for (int i = 0; i < numEdges; i++) {
+        fin >> edgeList[i][0] >> edgeList[i][1] >> edgeList[i][2];
+    }
+    fin.close();
+
+    char start_vertices;
+    char namelist[] = "b";
+
+    for (int i = 0; i < 2; i++) {
+        start_vertices = namelist[i];
+        int BFValue[Esize];
+        int BFPrev[Esize];
+
+        for (int k = 0; k < Esize; k++) {
+            BFValue[k] = -1;
+            BFPrev[k] = -1;
+        }
+
+        cout << "#####" << endl;
+
+        for (int j = 0; j < 2; j++) {
+            cout << "step:" << j + 1 << endl;
+            BF(edgeList, numEdges, start_vertices, BFValue, BFPrev);
+
+            for (int k = 0; k < Esize; k++) {
+                cout << BFValue[k] << " ";
+            }
+            cout << endl;
+
+            for (int k = 0; k < Esize; k++) {
+                cout << BFPrev[k] << " ";
+            }
+            cout << endl;
+        }
+    }
+}
 
 
 
