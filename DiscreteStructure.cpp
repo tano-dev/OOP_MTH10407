@@ -133,10 +133,12 @@ return 0;
 */
 //main Function
 int main() {
+    enum Func_check { BF, BF_Path, Traveling, none };
 
+    bool randGen = 1;
     int edgeList[70][3];
     int numEdges = 70;
-    int Esize = 10;
+    int const Esize = 10;
 
     ifstream fin("Input10A.txt");
     for (int i = 0; i < numEdges; i++) {
@@ -145,7 +147,7 @@ int main() {
     fin.close();
 
     char start_vertices;
-    char namelist[] = "b";
+    char namelist[] = "?b";
 
     for (int i = 0; i < 2; i++) {
         start_vertices = namelist[i];
