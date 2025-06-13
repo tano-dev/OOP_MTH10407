@@ -62,7 +62,7 @@ int main() {
     }
     return 0;
 }
-*/
+
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -77,61 +77,29 @@ using namespace std;
 void printedge(int[]);
 //Function to generate a random edges list
 int edgeListGen(int[][3], int, int, int);
-
-
-/*
-int main()
-{
-    //Function name for checking:
-    enum Func_check { BF, BF_Path, Traveling, none };
-
-    bool randGen = 1;
-    int edgeList[MAX][3];
-    int numEdges = 40;
-    int numVertices = 10;
-    int initlimit = 15;
-    if (!randGen) {
-        //Read from file
-        ifstream fin("EdgeList.txt");
-        for (int i = 0; i < numEdges; i++) {
-            fin >> edgeList[i][0] >> edgeList[i][1] >> edgeList[i][2];
-        }
-        fin.close();
-    }
-    else {
-        //Generate a random edgelist:
-        if (edgeListGen(edgeList, numEdges, numVertices, initlimit) < 0) return -1;
-    }
-    //Print the generated edgelist:
-    for(int i=0;i<numEdges;i++){
-        printedge(edgeList[i]);
-    }
-    //Check the chosen function:
-Func_check func = BF;
-
-switch (func) {
-case BF:
-    int BFValue[50];
-    int BFPrev[50];
-    char start_vertices = edgeList[0][0];
-    BF(edgeList, numEdges, start_vertices, BFValue, BFPrev);
-    break;
-case BF_Path:
-    char start_vertices = edgeList[0][0];
-    char end_vertices = edgeList[numEdges - 1][numEdges - 1];
-    BF_Path(edgeList, numEdges, start_vertices, end_vertices);
-    break;
-case Traveling:
-    char start_vertices = edgeList[0][0];
-    Traveling(edgeList, numEdges, start_vertices);
-    break;
-default: cout << "no such case";
-}
-return 0;
+//Function to implement the Bellman-Ford algorithm
+void BF(int edgeList[][3], int numEdges, char start_vertex, int BFValue[], int BFPrev[]) {
+	// Initialize the distance to all vertices as infinite and the predecessor as -1
+	for (int i = 0; i < 10; i++) {
+		BFValue[i] = MAX;
+		BFPrev[i] = -1;
+	}
+	// Set the distance to the starting vertex to 0
+	BFValue[start_vertex - 'a'] = 0;
+	// Relax edges repeatedly
+	for (int i = 0; i < 9; i++) { // Repeat for |V| - 1 times
+		for (int j = 0; j < numEdges; j++) {
+			int u = edgeList[j][0] - 'a'; // Convert char to index
+			int v = edgeList[j][1] - 'a'; // Convert char to index
+			int weight = edgeList[j][2];
+			if (BFValue[u] != MAX && BFValue[u] + weight < BFValue[v]) {
+				BFValue[v] = BFValue[u] + weight;
+				BFPrev[v] = u; // Store predecessor
+			}
+		}
+	}
 }
 
-*/
-//main Function
 int main() {
     enum Func_check { BF, BF_Path, Traveling, none };
 
@@ -140,7 +108,11 @@ int main() {
     int numEdges = 70;
     int const Esize = 10;
 
-    ifstream fin("Input10A.txt");
+    // Replace this line:
+    // ifstream fin("Input10A.txt");
+
+    // With the following code to read from the resource file path:
+	ifstream fin("EdgeList.txt");
     for (int i = 0; i < numEdges; i++) {
         fin >> edgeList[i][0] >> edgeList[i][1] >> edgeList[i][2];
     }
@@ -151,13 +123,13 @@ int main() {
 
     for (int i = 0; i < 2; i++) {
         start_vertices = namelist[i];
-        int BFValue[Esize];
-        int BFPrev[Esize];
+        int BFValue[Esize] = { MAX }; // Initialize BFValue array with MAX  
+        int BFPrev[Esize] = { -1 };   // Initialize BFPrev array with -1  
 
-        for (int k = 0; k < Esize; k++) {
-            BFValue[k] = -1;
-            BFPrev[k] = -1;
-        }
+        //for (int k = 0; k < Esize; k++) {
+        //    BFValue[k] = -1;
+        //    BFPrev[k] = -1;
+        //}
 
         cout << "#####" << endl;
 
@@ -194,7 +166,7 @@ int edgeListGen(int edgeList[][3], int numEdges, int numVertices, int initlimit 
     numEdges: number of edges
     numVertices: number vertices
     initlimit: if <=1 all edges weight is 1, else, edges weight random int [1,initlimit]
-    */
+
 
     //random generator init
     random_device rd;
@@ -280,3 +252,4 @@ int edgeListGen(int edgeList[][3], int numEdges, int numVertices, int initlimit 
     return 1;
 }
 
+*/
