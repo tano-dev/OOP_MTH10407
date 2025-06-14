@@ -33,44 +33,52 @@ void BF(int edgeList[][3], int numEdges, int start_vertex, int BFValue[], int BF
 	}
 	BFValue[startVertexIndex] = 0;
 	cout << endl << "Start vertex: " << start_vertex << " index: " << startVertexIndex << endl;
-	for (int i = 0; i < numEdges - 1; i++) { // Duyet qua tat ca cac canh
-		int u = edgeList[i][0]; // Dinh bat dau cua canh
-		if (u != start_vertex) continue; // Neu dinh bat dau khong phai la dinh bat dau thi bo qua
-		int v = edgeList[i][1]; // Dinh ket thuc cua canh
-		int weight = edgeList[i][2]; // Trong so cua canh
-		int valueIndexV = 0; // Khoi tao chi so cua dinh v
+	
+	Vertexes.push_back(start_vertex); // Add the start vertex to the list of vertices
+	for (int i = 0; i < VERTICES + 1; i++) {
 
-		//cout << "Edge: " << u << " -> " << v << ", weight: " << weight << " with BFValue " << endl;
-		if (BFValue[startVertexIndex] != -1) {
-			for (int k = 0; k < VERTICES; k++) {
-				if (Vertexes[k] == v) {
-					valueIndexV = k; // Tim chi so cua dinh v
-				}
-			}
-			if (BFValue[valueIndexV] != -1 && BFValue[valueIndexV] <= BFValue[startVertexIndex] + weight) {
-				//cout << "continue " << endl;
-				continue; // Neu dinh v da duoc cap nhat khoang cach toi thi bo qua
-			}
-			else {
-				//cout << "update " << endl;
-				BFValue[valueIndexV] = BFValue[startVertexIndex] + weight; // Cap nhat khoang cach toi dinh v
-				BFPrev[valueIndexV] = startVertexIndex; // Cap nhat dinh truoc cua v
-			}
-		}
-	}
-	for (int k = 0; k < VERTICES; k++) {
-		cout << BFValue[k] << " ";
+		cout << Vertexes[i] << " ";
 	}
 	cout << endl;
+	//for (int i = 0; i < numEdges - 1; i++) { // Duyet qua tat ca cac canh
+	//	int u = edgeList[i][0]; // Dinh bat dau cua canh
+	//	if (u != start_vertex) continue; // Neu dinh bat dau khong phai la dinh bat dau thi bo qua
+	//	int v = edgeList[i][1]; // Dinh ket thuc cua canh
+	//	int weight = edgeList[i][2]; // Trong so cua canh
+	//	int valueIndexV = 0; // Khoi tao chi so cua dinh v
 
-	for (int k = 0; k < VERTICES; k++) {
-		cout << BFPrev[k] << " ";
-	}
-	cout << endl;
-	for (int j = VERTICES - 1; j >= 0; j--) {
+	//	//cout << "Edge: " << u << " -> " << v << ", weight: " << weight << " with BFValue " << endl;
+	//	if (BFValue[startVertexIndex] != -1) {
+	//		for (int k = 0; k < VERTICES; k++) {
+	//			if (Vertexes[k] == v) {
+	//				valueIndexV = k; // Tim chi so cua dinh v
+	//			}
+	//		}
+	//		if (BFValue[valueIndexV] != -1 && BFValue[valueIndexV] <= BFValue[startVertexIndex] + weight) {
+	//			//cout << "continue " << endl;
+	//			continue; // Neu dinh v da duoc cap nhat khoang cach toi thi bo qua
+	//		}
+	//		else {
+	//			//cout << "update " << endl;
+	//			BFValue[valueIndexV] = BFValue[startVertexIndex] + weight; // Cap nhat khoang cach toi dinh v
+	//			BFPrev[valueIndexV] = startVertexIndex; // Cap nhat dinh truoc cua v
+	//		}
+	//	}
+	//}
+	//for (int k = 0; k < VERTICES; k++) {
+	//	cout << BFValue[k] << " ";
+	//}
+	//cout << endl;
+
+	//for (int k = 0; k < VERTICES; k++) {
+	//	cout << BFPrev[k] << " ";
+	//}
+	//cout << endl;
+	for (int j = VERTICES ; j >= 0; j--) {
 		int currentVertexIndex = j;
-		int currentVertex = Vertexes[currentVertexIndex];
-		if (currentVertex == start_vertex) continue;
+		int currentVertex = Vertexes[currentVertexIndex]; // Lay dinh hien tai tu chi so
+		if (j == VERTICES) currentVertexIndex = startVertexIndex;// Neu la lan dau tien thi gan chi so cua dinh bat dau
+		else if(currentVertex == start_vertex && j != VERTICES) continue; // Neu la dinh bat dau thi bo qua
 		cout << "Vertex: " << currentVertex << ", index: " << currentVertexIndex << endl;
 		for (int i = 0; i < numEdges - 1; i++) { // Duyet qua tat ca cac canh
 			int u = edgeList[i][0]; // Dinh bat dau cua canh
