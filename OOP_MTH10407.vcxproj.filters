@@ -48,6 +48,12 @@
     <ClCompile Include="test3_prep.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Revision3_1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Revision3_2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input10A.txt">

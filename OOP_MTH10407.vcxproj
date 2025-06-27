@@ -130,6 +130,8 @@
     <ClCompile Include="Hospital.cpp" />
     <ClCompile Include="Hotel.cpp" />
     <ClCompile Include="Library.cpp" />
+    <ClCompile Include="Revision3_1.cpp" />
+    <ClCompile Include="Revision3_2.cpp" />
     <ClCompile Include="SoftwareHouse.cpp" />
     <ClCompile Include="SoftwareHouse_Modify.cpp" />
     <ClCompile Include="DiscreteStructure.cpp" />
