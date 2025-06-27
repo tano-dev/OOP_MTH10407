@@ -36,19 +36,22 @@
     <ClCompile Include="Hotel.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="DiscreteStructure.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SRS.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="Source.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscreteStructure.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test3_prep.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input10A.txt">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

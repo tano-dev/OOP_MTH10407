@@ -137,6 +137,7 @@
     <ClCompile Include="SRS.cpp" />
     <ClCompile Include="test1.cpp" />
     <ClCompile Include="test2.cpp" />
+    <ClCompile Include="test3_prep.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input10A.txt" />
