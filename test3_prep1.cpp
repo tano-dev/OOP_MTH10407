@@ -17,7 +17,7 @@ In giỏ hàng của Alice và tổng tiền của giỏ hàng.
 */
 
 #include<iostream>
-#include<string.h>
+#include<string>
 #include<list>
 #include<map>
 using namespace std;

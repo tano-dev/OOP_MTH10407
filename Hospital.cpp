@@ -13,7 +13,7 @@ Các bác sĩ, và nhóm của bác sĩ đó.
 Bệnh nhân và phòng bệnh của bệnh nhân khi nhập viện. Hiển thị thông tin bác sĩ tư vấn chịu trách nhiệm cho bệnh nhân đó. Hiển thị nhóm bác sĩ đang điều trị cho bệnh nhân.
 */
 #include<iostream>
-#include<string.h>
+#include<string>
 #include<list>
 #include<map>
 using namespace std;

@@ -18,7 +18,7 @@ Chương trình chính phải làm các chức năng sau:
 • In thời khóa biểu của giáo viên ở trên.
 */
 #include<iostream>
-#include<string.h>
+#include<string>
 #include<list>
 #include<map>
 using namespace std;
