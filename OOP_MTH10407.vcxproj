@@ -139,6 +139,7 @@
     <ClCompile Include="SRS.cpp" />
     <ClCompile Include="test1.cpp" />
     <ClCompile Include="test2.cpp" />
+    <ClCompile Include="test3.cpp" />
     <ClCompile Include="test3_prep1.cpp" />
     <ClCompile Include="test3_prep2.cpp" />
     <ClCompile Include="test3_prep3.cpp" />

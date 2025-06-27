@@ -176,27 +176,27 @@ void Person::printCertificate() {
 
 
 // ====== Main
-int main() {
-    // Create 2 people
-    Person* p1 = new Person("12345", "Person 1", "2003");
-    Person* p2 = new Person("67890", "Person 2", "2000");
-
-    // Create 2 type of vaccines: Pfizer, Moderna
-    TypeOfVaccine* pfizer = new TypeOfVaccine("001", "2021", "Pfizer");
-    TypeOfVaccine* moderna = new TypeOfVaccine("002", "2022", "Moderna");
-
-    // Immunize Person 1    
-    p1->immunize(1, pfizer, "1-1-2020");
-    p1->immunize(2, pfizer, "1-5-2020");
-
-    // Immunize Person 2
-    p2->immunize(1, moderna, "2-2-2021");
-    p2->immunize(2, pfizer, "2-6-2021");
-
-    // Print certificate
-    cout << "\nPrinting certificate:\n";
-    p1->printCertificate();
-    p2->printCertificate();
-
-    return 0;
-}
+//int main() {
+//    // Create 2 people
+//    Person* p1 = new Person("12345", "Person 1", "2003");
+//    Person* p2 = new Person("67890", "Person 2", "2000");
+//
+//    // Create 2 type of vaccines: Pfizer, Moderna
+//    TypeOfVaccine* pfizer = new TypeOfVaccine("001", "2021", "Pfizer");
+//    TypeOfVaccine* moderna = new TypeOfVaccine("002", "2022", "Moderna");
+//
+//    // Immunize Person 1    
+//    p1->immunize(1, pfizer, "1-1-2020");
+//    p1->immunize(2, pfizer, "1-5-2020");
+//
+//    // Immunize Person 2
+//    p2->immunize(1, moderna, "2-2-2021");
+//    p2->immunize(2, pfizer, "2-6-2021");
+//
+//    // Print certificate
+//    cout << "\nPrinting certificate:\n";
+//    p1->printCertificate();
+//    p2->printCertificate();
+//
+//    return 0;
+//}
