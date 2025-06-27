@@ -45,13 +45,16 @@
     <ClCompile Include="DiscreteStructure.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="test3_prep.cpp">
+    <ClCompile Include="test3_prep1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Revision3_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Revision3_2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test3_prep2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
