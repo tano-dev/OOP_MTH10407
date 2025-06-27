@@ -246,20 +246,20 @@ Schedule::~Schedule() {
 		delete c;
 }
 //Main function
-int main() {
-	Lecturer* alice = new Lecturer("Alice", "Mathematics and Computer Science");
-	Subject* subject1 = new Subject("MTH10405", "DSA");
-	Subject* subject2 = new Subject("MTH10407", "OOP");
-	Room* room = new Room("C204", 40);
-	Classroom* class1 = new Classroom("2023-2024-HK2-Tue", room, subject1);
-	Classroom* class2 = new Classroom("2023-2024-HK2-Wed", room, subject2);
-	alice->getSchedule()->addClassroom(class1);
-	alice->getSchedule()->addClassroom(class2);
-	alice->display();
-	delete alice;
-	delete subject1;
-	delete subject2;
-	delete room;
-	return 0;
-}
+//int main() {
+//	Lecturer* alice = new Lecturer("Alice", "Mathematics and Computer Science");
+//	Subject* subject1 = new Subject("MTH10405", "DSA");
+//	Subject* subject2 = new Subject("MTH10407", "OOP");
+//	Room* room = new Room("C204", 40);
+//	Classroom* class1 = new Classroom("2023-2024-HK2-Tue", room, subject1);
+//	Classroom* class2 = new Classroom("2023-2024-HK2-Wed", room, subject2);
+//	alice->getSchedule()->addClassroom(class1);
+//	alice->getSchedule()->addClassroom(class2);
+//	alice->display();
+//	delete alice;
+//	delete subject1;
+//	delete subject2;
+//	delete room;
+//	return 0;
+//}
 

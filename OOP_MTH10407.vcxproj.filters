@@ -57,6 +57,9 @@
     <ClCompile Include="test3_prep2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test3_prep3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="Input10A.txt">
